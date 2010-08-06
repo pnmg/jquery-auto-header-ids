@@ -1,0 +1,78 @@
+<html>
+<head>
+  <title>headerIDs plugin tests</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="all" />
+  <style type="text/css">
+  .testAgainst {display:none;}
+  </style>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/jquery.headerIDs.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    test("ID generation", function() {
+      
+      correctIDs = [
+        'example',
+        'example_two',
+        'bobs_tale',
+        'jane_john',
+        'café_luna',
+        'too_many_spaces',
+        '1_answer',
+        'hasID',
+        'test',
+        'test_me'
+      ]
+      
+      $('#testAgainst1').headerIDs()
+      
+      $('#testAgainst1 h1').each(function(index, elem){
+        equals($(elem).attr('id'), correctIDs[index], 'Header ID matches expected')
+      })
+      
+    })
+    
+    test("Duplicate headers", function(){
+      correctIDs = [
+        'duplicate_example',
+        'duplicate_example_1',
+        'example_1'
+      ]
+      
+      $('#testAgainst2').headerIDs()
+      
+      $('#testAgainst2 h1').each(function(index, elem){
+        equals($(elem).attr('id'), correctIDs[index], 'Header ID matches expected')
+      })
+    })
+  })
+  </script>
+</head>
+<body>
+  <h1 id="qunit-header">headerIDs plugin tests</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  
+  <div id="testAgainst1" class="testAgainst">
+    <h1>Example</h1>
+    <h1>Example Two</h1>
+    <h1>Bob's Tale</h1>
+    <h1>Jane &amp; John</h1>
+    <h1>Café Luna</h1>
+    <h1>Too  many Spaces</h1>
+    <h1>1 answer</h1>
+    <h1 id="hasID">ID</h1>
+    <h1><a href="">Test</a></h1>
+    <h1>Test&nbsp;me</h1>
+  </div>
+  
+  <div id="testAgainst2" class="testAgainst">
+    <h1>Duplicate Example</h1>
+    <h1>Duplicate Example</h1>
+    <h1>Example</h1>
+  </div>
+</body>
+</html>
